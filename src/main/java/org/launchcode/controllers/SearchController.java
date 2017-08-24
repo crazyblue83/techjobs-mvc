@@ -23,5 +23,33 @@ public class SearchController {
     }
 
     // TODO #1 - Create handler to process search request and display results
-
+    @RequestMapping(value = "results")
+    public String results(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+        ArrayList<HashMap<String, String>> results;
+        if (searchType.equals("all")) {
+            results = JobData.findByValue(searchTerm);
+            model.addAttribute("results", results);
+            model.addAttribute("columns", ListController.columnChoices);
+        }   else if (searchType.equals("position type")) {
+            results = JobData.findByColumnAndValue(searchType, searchTerm);
+            model.addAttribute("results", results);
+            model.addAttribute("columns", ListController.columnChoices);
+        }
+            else if (searchType.equals("location")) {
+            results = JobData.findByColumnAndValue(searchType, searchTerm);
+            model.addAttribute("results", results);
+            model.addAttribute("columns", ListController.columnChoices);
+        }
+            else if (searchType.equals("employer")) {
+            results = JobData.findByColumnAndValue(searchType, searchTerm);
+            model.addAttribute("results", results);
+            model.addAttribute("columns", ListController.columnChoices);
+        }
+            else if (searchType.equals("core competency")) {
+            results = JobData.findByColumnAndValue(searchType, searchTerm);
+            model.addAttribute("results", results);
+            model.addAttribute("columns", ListController.columnChoices);
+        }
+        return "search";
+    }
 }
